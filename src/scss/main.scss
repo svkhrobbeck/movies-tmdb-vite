@@ -1,0 +1,43 @@
+.movie-card {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+}
+
+.movie-card__img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.movie-card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 12px;
+  background-color: black;
+  border: 3px solid green;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+
+  &--yellow {
+    border-color: yellow;
+  }
+
+  &--orange {
+    border-color: orange;
+  }
+
+  &--crimson {
+    border-color: crimson;
+  }
+}
+
+.movie-card__title {
+  font-size: 20px;
+}
