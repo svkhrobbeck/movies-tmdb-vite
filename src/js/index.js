@@ -1,5 +1,5 @@
-import "../scss/main.scss";
 import "bootstrap/dist/css/bootstrap.css";
+import "../scss/main.scss";
 
 import { PARAMS } from "./modules/constants";
 import { renderMovies } from "./modules/render";
