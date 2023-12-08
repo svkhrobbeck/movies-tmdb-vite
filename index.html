@@ -7,11 +7,31 @@
     <title>Movies</title>
   </head>
   <body>
-    <h1 class="text-center text-uppercase mb-3">Upcoming Movies</h1>
+    <h2 class="text-center text-uppercase mb-3">Upcoming Movies</h2>
     <div
       class="d-flex container flex-wrap justify-content-center gap-3"
       data-upcoming
     ></div>
+    <br />
+    <br />
+
+    <h2 class="text-center text-uppercase mb-3">Popular Movies</h2>
+    <div
+      class="d-flex container flex-wrap justify-content-center gap-3"
+      data-popular
+    ></div>
+    <br />
+    <br />
+
+    <div class="loader" data-index-loader>
+      <img class="loader__img" src="./images/loader.svg" alt="loader" />
+    </div>
+    <h2 class="text-center text-uppercase mb-3">Top Rated Movies</h2>
+    <div
+      class="d-flex container flex-wrap justify-content-center gap-3"
+      data-top-rated
+    ></div>
+
     <script type="module" src="/src/js/index.js"></script>
   </body>
 </html>

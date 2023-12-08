@@ -1,21 +1,24 @@
+// styles
 import "../scss/main.scss";
 import "bootstrap/dist/css/bootstrap.css";
-import { getMovies } from "./modules/request";
-import {
-  renderMovieBanner,
-  renderMovieDetails,
-  renderMovieTrailers,
-} from "./modules/render";
+// methods
+import getMovies from "./modules/request";
+import * as renders from "./modules/render";
+import { setPageTitle } from "./modules/helpers";
+// elements
+import * as els from "./modules/elements";
 
-const movieId =
-  new URLSearchParams(window.location.search).get("movieId") || 453545;
+// code body
+const params = new URLSearchParams(window.location.search);
+const movieId = params.get("movieId") || 453545;
 
 getMovies(`/movie/${movieId}`).then(data => {
-  document.title = data.original_title || "Movie";
-  renderMovieBanner(data, document.querySelector("[data-wrapper]"));
-  renderMovieDetails(data, document.querySelector("[data-details]"));
+  setPageTitle(data.original_title || "Movie");
+
+  renders.renderMovieBanner(data, els.elBannerWrapper);
+  renders.renderMovieDetails(data, els.elDetailsWrapper);
 });
 
-getMovies(`/movie/${movieId}/videos`).then(data => {
-  renderMovieTrailers(data.results, document.querySelector("[data-trailers]"));
-});
+getMovies(`/movie/${movieId}/videos`)
+  .then(data => renders.renderMovieTrailers(data.results, els.elTrailersBanner))
+  .catch(err => console.error(err));

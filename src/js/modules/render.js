@@ -1,18 +1,6 @@
 import moment from "moment";
 import { API_IMG_URL, API_BG_URL } from "./constants";
-
-
-const calcVoteAverage = rate => {
-  if (rate >= 7) {
-    return "green";
-  } else if (rate < 7 && rate >= 6) {
-    return "yellow";
-  } else if (rate < 6 && rate >= 5) {
-    return "orange";
-  } else if (rate < 5) {
-    return "crimson";
-  }
-};
+import { calcVoteAverage } from "./helpers";
 
 export const renderMovies = (movies = [], elWrapper) => {
   elWrapper.innerHTML = "";
@@ -67,15 +55,11 @@ export const renderMovieTrailers = (trailers = [], elWrapper) => {
 
   trailers.forEach(trailer => {
     html += `
-          <li
-            class="splide__slide"
-          >
-          <iframe src="https://www.youtube.com/embed/${trailer.key}"></iframe>
+          <li class="splide__slide">
+            <iframe src="https://www.youtube.com/embed/${trailer.key}"></iframe>
           </li>
     `;
   });
 
   elWrapper.innerHTML = html;
 };
-
-
