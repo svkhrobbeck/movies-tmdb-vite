@@ -2,26 +2,12 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "../scss/main.scss";
 
-// constants
-import { PARAMS } from "./modules/constants";
 // methods
-import { renderMovies } from "./modules/render";
+import { renderMovies, renderPagination } from "./modules/render";
 import getMovies from "./modules/request";
-import { switchLoader } from "./modules/helpers";
+import { getSearchParams, switchLoader } from "./modules/helpers";
 // elements
 import * as els from "./modules/elements";
-
-// code body
-getMovies("/movie/upcoming", PARAMS)
-  .then(data => {
-    switchLoader(true, els.elIndexLoader);
-    renderMovies(data.results, els.elUpcomingMovies);
-    switchLoader(false, els.elIndexLoader);
-  })
-  .catch(err => {
-    console.error(err);
-    switchLoader(false, els.elIndexLoader);
-  });
 
 // getMovies("/movie/popular", PARAMS)
 //   .then(data => renderMovies(data.results, els.elPopularMovies))
@@ -31,5 +17,19 @@ getMovies("/movie/upcoming", PARAMS)
 //   .then(data => renderMovies(data.results, els.elTopRatedMovies))
 //   .catch(err => console.error(err));
 
-console.dir(els.elIndexLoader);
+// code body
+const fetches = async () => {
+  const currentPage = getSearchParams("page");
+  const { results, page, total_pages, total_results } = await getMovies(
+    "/movie/upcoming",
+    { page: currentPage ? currentPage : 1 }
+  );
 
+  switchLoader(true, els.elIndexLoader);
+  renderMovies(results, els.elUpcomingMovies);
+  renderPagination(results, page, total_pages, total_results, els.elPagination);
+  switchLoader(false, els.elIndexLoader);
+};
+fetches();
+
+// els.elSearchForm.addEventListener("input", onSearchInput);

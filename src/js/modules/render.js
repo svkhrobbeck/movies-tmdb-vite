@@ -7,11 +7,13 @@ export const renderMovies = (movies = [], elWrapper) => {
   let html = "";
 
   movies.forEach(movie => {
+    const img = movie.poster_path
+      ? API_IMG_URL + movie.poster_path
+      : "https://placehold.co/200x300";
+
     html += `
   <div class="position-relative movie-card">
-    <img class="movie-card__img" src=${API_IMG_URL + movie.poster_path} alt=${
-      movie.original_title
-    }>
+    <img class="movie-card__img" src=${img} alt=${movie.original_title}>
     <div class="position-absolute movie-card__badge movie-card__badge--${calcVoteAverage(
       movie.vote_average
     )}">${movie.vote_average.toFixed(1)}</div>
@@ -20,6 +22,12 @@ export const renderMovies = (movies = [], elWrapper) => {
   </div>
   `;
   });
+
+  if (!movies.length) {
+    html = `
+    <h2 class="text-center">movies not found</h2>
+    `;
+  }
 
   elWrapper.innerHTML = html;
 };
@@ -63,3 +71,36 @@ export const renderMovieTrailers = (trailers = [], elWrapper) => {
 
   elWrapper.innerHTML = html;
 };
+
+export const renderPagination = (
+  movies,
+  currentPage,
+  totalPages,
+  totalResults,
+  elWrapper
+) => {
+  elWrapper.innerHTML = "";
+  let html = "";
+
+  const pagesArr = new Array(totalPages).fill("").map((_, idx) => idx + 1);
+
+  pagesArr.forEach(page => {
+    const isActive = page === currentPage;
+
+    html += `
+    <li class="page-item ${
+      isActive ? "active" : ""
+    }"><a class="page-link" href="/?page=${page}">${page}</a></li>
+    `;
+  });
+
+  elWrapper.innerHTML = html;
+};
+
+/*
+<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+<li class="page-item"><a class="page-link" href="#">1</a></li>
+<li class="page-item"><a class="page-link" href="#">2</a></li>
+<li class="page-item"><a class="page-link" href="#">3</a></li>
+<li class="page-item"><a class="page-link" href="#">Next</a></li>
+*/

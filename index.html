@@ -7,6 +7,26 @@
     <title>Movies</title>
   </head>
   <body>
+    <form action="search.html" class="form" id="form">
+      <h1 class="text-center">Search</h1>
+      <div class="d-flex">
+        <input
+          class="form-control"
+          id="input"
+          name="query"
+          type="text"
+          placeholder="search"
+        />
+        <button class="btn btn-primary" type="submit">submit</button>
+      </div>
+    </form>
+
+    <h2 class="text-center text-uppercase mb-3 d-none">Searched Movies</h2>
+    <div
+      class="d-flex container flex-wrap justify-content-center gap-3"
+      data-search
+    ></div>
+
     <h2 class="text-center text-uppercase mb-3">Upcoming Movies</h2>
     <div
       class="d-flex container flex-wrap justify-content-center gap-3"
@@ -15,7 +35,16 @@
     <br />
     <br />
 
-    <h2 class="text-center text-uppercase mb-3">Popular Movies</h2>
+    <div class="d-flex justify-content-center pb-4">
+      <nav aria-label="Page navigation example">
+        <ul
+          class="pagination flex-wrap justify-content-center"
+          id="pagination"
+        ></ul>
+      </nav>
+    </div>
+
+    <!-- <h2 class="text-center text-uppercase mb-3">Popular Movies</h2>
     <div
       class="d-flex container flex-wrap justify-content-center gap-3"
       data-popular
@@ -23,14 +52,15 @@
     <br />
     <br />
 
-    <div class="loader" data-index-loader>
-      <img class="loader__img" src="./images/loader.svg" alt="loader" />
-    </div>
     <h2 class="text-center text-uppercase mb-3">Top Rated Movies</h2>
     <div
       class="d-flex container flex-wrap justify-content-center gap-3"
       data-top-rated
-    ></div>
+    ></div> -->
+
+    <div class="loader" data-index-loader>
+      <img class="loader__img" src="./images/loader.svg" alt="loader" />
+    </div>
 
     <script type="module" src="/src/js/index.js"></script>
   </body>
