@@ -22,7 +22,7 @@ const fetches = async () => {
     page,
   });
 
-  renderMovies(results, elMoviesWrapper);
+  renderMovies(results, els.elMoviesWrapper);
 
   renderPagination(page, total_pages, els.elPagination, "page", PGN_TEXTS, url);
   switchLoader(false, els.elIndexLoader);
