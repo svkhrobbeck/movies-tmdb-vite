@@ -71,36 +71,3 @@ export const renderMovieTrailers = (trailers = [], elWrapper) => {
 
   elWrapper.innerHTML = html;
 };
-
-export const renderPagination = (
-  movies,
-  currentPage,
-  totalPages,
-  totalResults,
-  elWrapper
-) => {
-  elWrapper.innerHTML = "";
-  let html = "";
-
-  const pagesArr = new Array(totalPages).fill("").map((_, idx) => idx + 1);
-
-  pagesArr.forEach(page => {
-    const isActive = page === currentPage;
-
-    html += `
-    <li class="page-item ${
-      isActive ? "active" : ""
-    }"><a class="page-link" href="/?page=${page}">${page}</a></li>
-    `;
-  });
-
-  elWrapper.innerHTML = html;
-};
-
-/*
-<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-<li class="page-item"><a class="page-link" href="#">1</a></li>
-<li class="page-item"><a class="page-link" href="#">2</a></li>
-<li class="page-item"><a class="page-link" href="#">3</a></li>
-<li class="page-item"><a class="page-link" href="#">Next</a></li>
-*/

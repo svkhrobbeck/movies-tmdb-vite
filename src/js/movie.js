@@ -15,6 +15,7 @@ const fetches = async () => {
   // 1
   const movie = await getMovies(`/movie/${movieId}`);
   setPageTitle(movie.original_title || "Movie");
+
   renders.renderMovieBanner(movie, els.elBannerWrapper);
   renders.renderMovieDetails(movie, els.elDetailsWrapper);
 

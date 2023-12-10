@@ -8,6 +8,8 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         "movie.html": resolve(__dirname, "movie.html"),
         "search.html": resolve(__dirname, "search.html"),
+        "popular.html": resolve(__dirname, "popular.html"),
+        "top-rated.html": resolve(__dirname, "top-rated.html"),
       },
     },
   },

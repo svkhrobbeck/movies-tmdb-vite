@@ -6,17 +6,27 @@
     <title>Search</title>
   </head>
   <body>
-    <div
-      class="d-flex container flex-wrap justify-content-center gap-3"
-      id="search-movies"
-    ></div>
+    <main class="main-content">
+      <div
+        class="d-flex container flex-wrap justify-content-center gap-3"
+        id="search-movies"
+      ></div>
 
-    <!-- loader -->
-    <div class="loader" data-index-loader>
-      <img class="loader__img" src="./images/loader.svg" alt="loader" />
-    </div>
+      <div class="d-flex justify-content-center pb-4">
+        <nav aria-label="Page navigation example">
+          <ul
+            class="pagination flex-wrap justify-content-center"
+            id="pagination"
+          ></ul>
+        </nav>
+      </div>
 
-    
+      <!-- loader -->
+      <div class="loader" data-index-loader>
+        <img class="loader__img" src="./images/loader.svg" alt="loader" />
+      </div>
+    </main>
+
     <script type="module" src="/src/js/search.js"></script>
   </body>
 </html>

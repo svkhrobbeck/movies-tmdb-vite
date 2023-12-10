@@ -3,31 +3,28 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../scss/main.scss";
 
 // methods
-import { renderMovies, renderPagination } from "./modules/render";
+import { renderMovies } from "./modules/render";
 import getMovies from "./modules/request";
 import { getSearchParams, switchLoader } from "./modules/helpers";
 // elements
 import * as els from "./modules/elements";
-
-// getMovies("/movie/popular", PARAMS)
-//   .then(data => renderMovies(data.results, els.elPopularMovies))
-//   .catch(err => console.error(err));
-
-// getMovies("/movie/top_rated", PARAMS)
-//   .then(data => renderMovies(data.results, els.elTopRatedMovies))
-//   .catch(err => console.error(err));
+import { renderPagination } from "./modules/pagination";
+import { PGN_TEXTS } from "./modules/constants";
 
 // code body
+const page = +getSearchParams("page") || 1;
+const upcomingParams = { page };
+
 const fetches = async () => {
-  const currentPage = getSearchParams("page");
-  const { results, page, total_pages, total_results } = await getMovies(
+  const { results, total_pages } = await getMovies(
     "/movie/upcoming",
-    { page: currentPage ? currentPage : 1 }
+    upcomingParams
   );
 
   switchLoader(true, els.elIndexLoader);
   renderMovies(results, els.elUpcomingMovies);
-  renderPagination(results, page, total_pages, total_results, els.elPagination);
+
+  renderPagination(page, total_pages, els.elPagination, "page", PGN_TEXTS);
   switchLoader(false, els.elIndexLoader);
 };
 fetches();
