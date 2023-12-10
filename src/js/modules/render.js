@@ -1,6 +1,7 @@
 import moment from "moment";
 import { API_IMG_URL, API_BG_URL } from "./constants";
 import { calcVoteAverage } from "./helpers";
+import { elCastBD, elCastBio, elCastImg, elCastName } from "./elements";
 
 export const renderMovies = (movies = [], elWrapper) => {
   elWrapper.innerHTML = "";
@@ -57,6 +58,26 @@ export const renderMovieDetails = (movie = {}, elWrapper) => {
   `;
 };
 
+export const renderMovieCasts = (casts = [], elWrapper) => {
+  elWrapper.innerHTML = "";
+  let html = "";
+
+  casts.forEach(cast => {
+    html += `
+    <a class="card" href="cast.html?cast=${cast.id}">
+      <img class="card-img-top" src="${API_IMG_URL + cast.profile_path}"/>
+      <div class="card-footer">
+      <h3 class="card-title">${cast.original_name}</h3>
+        <p class="card-text">${cast.character}</p>
+      </div>
+    </a>
+
+    `;
+  });
+
+  elWrapper.innerHTML = html;
+};
+
 export const renderMovieTrailers = (trailers = [], elWrapper) => {
   elWrapper.innerHTML = "";
   let html = "";
@@ -71,3 +92,31 @@ export const renderMovieTrailers = (trailers = [], elWrapper) => {
 
   elWrapper.innerHTML = html;
 };
+
+export const renderCastPage = (cast = {}) => {
+  elCastName.textContent = cast.name;
+  elCastBio.textContent = cast.biography;
+  elCastBD.textContent = moment(cast.birthday).format("DD.MM.YYYY");
+  elCastImg.src = API_IMG_URL + cast.profile_path;
+};
+
+/*
+{
+    "adult": false,
+    "also_known_as": [
+        "Киллиан Мерфи"
+    ],
+    "biography": ""
+    "birthday": "1976-05-25",
+    "deathday": null,
+    "gender": 2,
+    "homepage": null,
+    "id": 2037,
+    "imdb_id": "nm0614165",
+    "known_for_department": "Acting",
+    "name": "Cillian Murphy",
+    "place_of_birth": "Douglas, Cork, Ireland",
+    "popularity": 66.342,
+    "profile_path": "/dm6V24NjjvjMiCtbMkc8Y2WPm2e.jpg"
+}
+ */

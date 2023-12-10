@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         "movie.html": resolve(__dirname, "movie.html"),
+        "cast.html": resolve(__dirname, "cast.html"),
         "search.html": resolve(__dirname, "search.html"),
         "popular.html": resolve(__dirname, "popular.html"),
         "top-rated.html": resolve(__dirname, "top-rated.html"),

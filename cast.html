@@ -3,11 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie</title>
+    <title>Casts</title>
   </head>
   <body>
-    <div class="wrapper position-relative" data-wrapper></div>
-
     <!-- header -->
     <header class="d-flex bg-dark justify-content-center py-3">
       <ul class="nav nav-pills">
@@ -24,26 +22,16 @@
     </header>
 
     <main class="main-content">
-      <div class="inner">
-        <div class="details-wrapper container" data-details></div>
-
-        <ul
-          class="splide__list d-flex flex-wrap justify-content-center gap-2"
-          data-trailers
-        ></ul>
-        <h2 class="casts text-center mb-4">CASTS</h2>
-        <div
-          class="casts-wrapper d-flex container flex-wrap gap-3"
-          data-casts
-        ></div>
-      </div>
-
-      <!-- loader -->
-      <div class="loader" data-index-loader>
-        <img class="loader__img" src="./images/loader.svg" alt="loader" />
+      <div class="d-flex container gap-3 align-items-center">
+        <div>
+          <h1 class="cast-name"></h1>
+          <p class="cast-biography"></p>
+          <p class="cast-birthday"></p>
+        </div>
+        <img class="cast-img" src="" alt="" />
       </div>
     </main>
 
-    <script type="module" src="/src/js/movie.js"></script>
+    <script type="module" src="/src/js/cast.js"></script>
   </body>
 </html>
