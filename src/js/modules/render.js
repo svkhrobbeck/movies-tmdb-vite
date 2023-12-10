@@ -66,7 +66,7 @@ export const renderMovieCasts = (casts = [], elWrapper) => {
 
   casts.forEach(cast => {
     html += `
-    <a class="card" href="cast.html?cast=${cast.id}">
+    <a class="card no-underline" href="cast.html?cast=${cast.id}">
       <img class="card-img-top" style="width:300px" src="${
         cast.profile_path ? API_IMG_URL + cast.profile_path : NOT_FOUND_IMG
       }"/>
