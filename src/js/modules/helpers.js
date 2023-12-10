@@ -1,7 +1,14 @@
+import axios from "axios";
 import { elSearchedMovies } from "./elements";
 import { renderMovies } from "./render";
-import getMovies from "./request";
 let timeoutId = 0;
+
+import "./axios";
+
+export const getMovies = async (url, params) => {
+  const payload = await axios.get(url, { params });
+  return payload.data;
+};
 
 export const setPageTitle = title => {
   document.title = title;

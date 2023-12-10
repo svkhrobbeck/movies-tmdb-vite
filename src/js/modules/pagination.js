@@ -14,28 +14,17 @@ export const renderPagination = (page, total, el, query, texts, url = "/?") => {
 
   // 1th page
   if (page > 3) {
-    html += `
-    <li class="page-item">
-      <a class="page-link" href="${url}${query}=1">1</a>
-    </li>
-    `;
-  }
-
-  // 1st dots
-  if (page > 3) {
-    html += `
-    <li class="page-item">
-      <a class="page-link">...</a>
-    </li>
-    `;
+    html += `<li class="page-item">
+              <a class="page-link" href="${url}${query}=1">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link">...</a>
+            </li>`;
   }
 
   // forEach pages
   slicedPages.forEach(pg => {
-    const isActive = pg === page;
-
-    html += `
-            <li class="page-item ${isActive ? "active" : ""}">
+    html += `<li class="page-item ${pg === page ? "active" : ""}">
               <a class="page-link" href="${url}${query}=${pg}">${pg}</a>
             </li>`;
   });
@@ -46,12 +35,6 @@ export const renderPagination = (page, total, el, query, texts, url = "/?") => {
       <li class="page-item">
         <a class="page-link">...</a>
       </li>
-    `;
-  }
-
-  // last page
-  if (page < total - 2) {
-    html += `
       <li class="page-item">
         <a class="page-link" href="${url}${query}=${total}">${total}</a>
       </li>

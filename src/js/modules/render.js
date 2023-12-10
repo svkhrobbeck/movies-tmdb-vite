@@ -1,6 +1,6 @@
 import moment from "moment";
-import { API_IMG_URL, API_BG_URL } from "./constants";
-import { calcVoteAverage } from "./helpers";
+import { API_IMG_URL, API_BG_URL, NOT_FOUND_IMG } from "./constants";
+import { calcVoteAverage, setPageTitle } from "./helpers";
 import { elCastBD, elCastBio, elCastImg, elCastName } from "./elements";
 
 export const renderMovies = (movies = [], elWrapper) => {
@@ -10,7 +10,7 @@ export const renderMovies = (movies = [], elWrapper) => {
   movies.forEach(movie => {
     const img = movie.poster_path
       ? API_IMG_URL + movie.poster_path
-      : "https://placehold.co/200x300";
+      : NOT_FOUND_IMG;
 
     html += `
   <div class="position-relative movie-card">
@@ -51,6 +51,8 @@ export const renderMovieBanner = (movie = {}, elWrapper, slider = false) => {
 };
 
 export const renderMovieDetails = (movie = {}, elWrapper) => {
+  setPageTitle(movie.original_title || "Movie");
+
   elWrapper.innerHTML = `
   <span>budget: ${movie.budget.toLocaleString()}$</span>
   <br/>
@@ -65,13 +67,14 @@ export const renderMovieCasts = (casts = [], elWrapper) => {
   casts.forEach(cast => {
     html += `
     <a class="card" href="cast.html?cast=${cast.id}">
-      <img class="card-img-top" src="${API_IMG_URL + cast.profile_path}"/>
+      <img class="card-img-top" style="width:300px" src="${
+        cast.profile_path ? API_IMG_URL + cast.profile_path : NOT_FOUND_IMG
+      }"/>
       <div class="card-footer">
       <h3 class="card-title">${cast.original_name}</h3>
         <p class="card-text">${cast.character}</p>
       </div>
     </a>
-
     `;
   });
 
@@ -94,29 +97,11 @@ export const renderMovieTrailers = (trailers = [], elWrapper) => {
 };
 
 export const renderCastPage = (cast = {}) => {
+  setPageTitle(cast.name || "Cast");
   elCastName.textContent = cast.name;
   elCastBio.textContent = cast.biography;
   elCastBD.textContent = moment(cast.birthday).format("DD.MM.YYYY");
-  elCastImg.src = API_IMG_URL + cast.profile_path;
+  elCastImg.src = cast.profile_path
+    ? API_IMG_URL + cast.profile_path
+    : NOT_FOUND_IMG;
 };
-
-/*
-{
-    "adult": false,
-    "also_known_as": [
-        "Киллиан Мерфи"
-    ],
-    "biography": ""
-    "birthday": "1976-05-25",
-    "deathday": null,
-    "gender": 2,
-    "homepage": null,
-    "id": 2037,
-    "imdb_id": "nm0614165",
-    "known_for_department": "Acting",
-    "name": "Cillian Murphy",
-    "place_of_birth": "Douglas, Cork, Ireland",
-    "popularity": 66.342,
-    "profile_path": "/dm6V24NjjvjMiCtbMkc8Y2WPm2e.jpg"
-}
- */
